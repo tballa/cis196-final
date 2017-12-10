@@ -1,0 +1,31 @@
+<% if admin? %>
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <%= render 'messages/form', message: @message %>
+    </div>
+  </div>
+  <br>
+      <% if @messages.empty? %>
+        <p class="text-center">There aren't any posts yet, you should create one!</p>
+      <% else %>
+        <% @messages.reverse.each do |message| %>
+          <%= render 'messages/message', message: message %>
+          <br>
+        <% end %>
+      <% end %>
+<% else %>
+  <body>
+    <div class="cover-container", align="center">
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Your dispute is being reviewed.</h1>
+        <p class="lead">
+          Please check back again later to see if you are reinstated and assigned to your target.
+        </p>
+      </main>
+    </div>
+  </body>
+  <% @messages.reverse.each do |message| %>
+    <%= render 'messages/message', message: message %>
+    <br>
+  <% end %>
+<% end %>

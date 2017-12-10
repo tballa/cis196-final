@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-body">
+    <span class="card-title"><strong><%= message.user.name %></strong></span><br>
+    <small class="card-subtitle text-muted">Updated <%= time_ago_in_words(message.updated_at) %> ago</small><br>
+    <p class="card-text"><%= message.text %></p>
+    <% if current_user == message.user %>
+      <%= link_to 'Edit', edit_message_path(message), class: 'card-link' %>
+      <%= link_to 'Delete', message, method: :delete, class: 'card-link' %>
+    <% end %>
+  </div>
+</div>

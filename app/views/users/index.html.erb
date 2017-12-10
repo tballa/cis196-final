@@ -1,0 +1,24 @@
+<h1>Raiders</h1>
+
+<table class="table table-light">
+  <thead>
+    <tr>
+      <th class="table-dark bg-primary">Name</th>
+      <th class="table-dark bg-primary">Email</th>
+      <th class="table-dark bg-primary">Target</th>
+      <th class="table-dark bg-primary" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.target %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

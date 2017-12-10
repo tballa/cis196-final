@@ -1,0 +1,9 @@
+<div class="cover-container", align="center">
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">Congratulations on your victory, <%=current_user.name%>!</h1>
+  </main>
+</div>
+<% @messages.each do |message| %>
+  <%= render 'messages/message', message: message %>
+  <br>
+<% end %>

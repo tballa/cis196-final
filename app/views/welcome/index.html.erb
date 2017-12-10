@@ -1,0 +1,69 @@
+<% if logged_in? %>
+  <% if admin? %>
+    <body>
+      <div class="cover-container", align="center", style="position: absolute; margin: auto; top: 0; right: 0; bottom: 0; left: 0; width: 1000px; height: 100px;">
+        <main role="main" class="inner cover">
+          <h1 class="cover-heading">Welcome, Gamemaster.</h1>
+          <p class="lead">
+            <%= link_to "Start a new round!", '/update_pairings', class: 'button' %>
+          </p>
+        </main>
+      </div>
+    </body>
+  <% else %>
+    <% if !current_user.target %>
+      <body>
+        <div class="cover-container", align="center">
+          <main role="main" class="inner cover">
+            <h1 class="cover-heading">You currently do not have a target.</h1>
+            <p class="lead">
+              Please check again at a later time.
+            </p>
+          </main>
+        </div>
+      </body>    
+    <% elsif current_user.view_target.active && current_user.active %>
+      <body>
+        <div class="cover-container", align="center">
+          <main role="main" class="inner cover">
+            <h1 class="cover-heading">Your target is <%= current_user.target %>!</h1>
+            <p class="lead">
+              <%= link_to "Target taken over!", '/takedown_target', class: 'button' %>
+            </p>
+          </main>
+        </div>
+      </body>
+    <% elsif !current_user.view_target.active && current_user.active %>
+      <div class="cover-container", align="center">
+        <main role="main" class="inner cover">
+          <h1 class="cover-heading">Congratulations on your victory, <%=current_user.name%>!</h1>
+        </main>
+      </div>
+    <% else %>
+      <body>
+        <div class="cover-container", align="center">
+          <main role="main" class="inner cover">
+            <h1 class="cover-heading">You were taken out!</h1>
+            <p class="lead">
+              Think this is a mistake? Let the Gamemaster know by disputing the takeover.
+            </p>
+            <p class="lead">
+              <%= link_to "Dispute takeover!", '/dispute_takeover', class: 'button' %>
+            </p>
+          </main>
+        </div>
+      </body>
+    <% end %>
+    <% @messages.reverse.each do |message| %>
+      <%= render 'messages/message', message: message %>
+      <br>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3", align="center">
+      <h1>Wharton Council Presents: Hostile Takeover!</h1>
+      <p>Sign up or log in to play Wharton's Game of Assassins!</p>
+    </div>
+  </div>
+<% end %>

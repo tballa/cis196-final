@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background-color: #2b6f53;">
+  <div class="container">
+    <%= link_to 'Hostile Takeover', root_path, class: 'navbar-brand' %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_content" aria-controls="navbar_content" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar_content" class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <%# Only display the current user's name, friend requests, and log out links if a user is logged in %>
+        <% if current_user %>
+        <% if admin? %>
+          <li class="nav-item"><%= link_to "Posts", '/posts', class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to "Takeover Disputes", '/takeover_disputes', class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'Users', '/users', class: 'nav-link' %></li>
+        <% end %>
+          <li class="nav-item"><%= link_to "Log Out", '/logout', method: :delete, class: 'nav-link' %></li>
+        <%# Only display the sign up and log in links if no user is logged in %>
+        <% else %>
+          <li class="nav-item"><%= link_to "Sign Up", '/users/new', class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to "Log In", '/login', class: 'nav-link' %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

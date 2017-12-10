@@ -1,0 +1,23 @@
+<table class="table table-light">
+  <thead>
+    <tr>
+      <th class="table-dark bg-primary">Current Takeover Disputes</th>
+      <th class="table-dark bg-primary" colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if current_user.messages_for_admin.empty? %>
+      <td>No current takeover disputes.</td>
+    <% else %>
+      <% current_user.messages_for_admin.each do |message| %>
+        <tr>
+          <td>
+            <h5>Target: <%= message.user.name %>, Raider: <%= message.user.get_attacker.name %></h5>
+            <p><%= message.text %></p>
+          </td>
+          <td><%= link_to 'Deactivate Player', takedown_target_user_path(message.user.id), method: :delete %></td>
+          <td><%= link_to 'Reinstate Player', reinstate_player_user_path(message.user.id), method: :post %></td>
+        </tr>
+      <% end %>
+  <% end %>
+</table>
