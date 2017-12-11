@@ -50,23 +50,19 @@ class MessagesController < ApplicationController
   def destroy
     @message.destroy
     respond_to do |format|
-      if admin?
-        format.html { redirect_to '/posts', notice: 'Message was successfully destroyed.' }
-      else
-        format.html { redirect_to '/posts', notice: 'Message was successfully destroyed.' }
-      end
+      format.html { redirect_to '/posts', notice: 'Message was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = Message.find(params[:id])
-    end
+private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def message_params
-      params.require(:message).permit(:text, :user_id)
-    end
+  def set_message
+    @message = Message.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def message_params
+    params.require(:message).permit(:text, :user_id)
+  end
 end
